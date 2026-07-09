@@ -1,0 +1,80 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  height: 36px;
+  background-color: #21252e;
+  border: 1px solid #2e3340;
+  border-radius: 7px;
+  cursor: pointer;
+  user-select: none;
+  min-width: 200px;
+  max-width: 200px;
+  margin-left: 10px;
+}
+
+.container:hover {
+  border-color: #444c5c;
+}
+
+.image {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.name {
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #e8eaf0;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+}
+
+.icon {
+  color: #8b90a0;
+  flex-shrink: 0;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 100%;
+  background-color: #1a1d24;
+  border: 1px solid #2e3340;
+  border-radius: 7px;
+  overflow: hidden;
+  z-index: 1000;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.item:hover {
+  background-color: #21252e;
+}
+
+.item:not(:last-child) {
+  border-bottom: 1px solid #2e3340;
+}

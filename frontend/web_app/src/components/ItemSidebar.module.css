@@ -1,0 +1,52 @@
+.element {
+  display: flex;
+  flex-direction: row;
+  border-radius: 6px;
+  flex-direction: row;
+  gap: 10px;
+  color: #8b90a0;
+  padding-left: 15px;
+  height: 30px;
+  align-items: center;
+  width: 200px;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.active {
+  display: flex;
+  flex-direction: row;
+  background-color: #212e45;
+  border-radius: 6px;
+  gap: 10px;
+  width: 100%;
+  color: #4a8cff;
+  padding-left: 15px;
+  height: 30px;
+  align-items: center;
+  text-decoration: none;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 70%;
+  background: #447fe4;
+  border-radius: 999px;
+}
+
+.icon {
+  color: inherit;
+}
+
+.text {
+  font-size: 13px;
+  font-family: "DM Sans", sans-serif;
+  color: inherit;
+}

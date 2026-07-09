@@ -1,0 +1,106 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  height: 35px;
+  width: 330px;
+  align-items: center;
+  border: solid 1px;
+  border-color: #2e3340;
+  border-radius: 6px;
+  background-color: #21252e;
+  padding: 2px;
+  box-sizing: border-box;
+  padding-left: 10px;
+}
+
+.input {
+  flex: 1;
+  height: 30px;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  color: #7e8087;
+  font-size: 13px;
+  margin-left: 3px;
+}
+
+.button {
+  background-color: #447fe4;
+  width: 60px;
+  height: 100%;
+  border: none;
+  border-radius: 4px;
+  align-items: center;
+  justify-content: center;
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+}
+
+.input:focus-within {
+  border-color: #447fe4;
+}
+
+.wrapper {
+  position: relative;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: #2c2d30; /* ajuste para a cor do seu tema */
+  border: 1px solid #3a3b3f;
+  border-radius: 6px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  z-index: 100;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.dropdownItem:not(:last-child) {
+  border-bottom: 1px solid #3a3b3f;
+}
+
+.dropdownItem:hover {
+  background: #3a3b4a;
+}
+
+.deviceName {
+  font-size: 13px;
+  color: #fff;
+  font-weight: 500;
+  flex: 1;
+}
+
+.deviceArea {
+  font-size: 11px;
+  color: #7e8087;
+}
+
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.active {
+  background: #4ade80;
+}
+
+.inactive {
+  background: #f87171;
+}

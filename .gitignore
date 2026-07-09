@@ -1,0 +1,130 @@
+# ======================== Global ==========================
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor backups
+*~
+*.swp
+*.swo
+
+# Logs
+*.log
+logs/
+
+# Tests
+tests
+docker-compose-test.yml
+
+
+# ======================== Node.js =========================
+# node_modules for any subproject
+**/node_modules/
+
+# Build / output
+**/dist/
+**/build/
+**/coverage/
+**/.next/
+**/.nuxt/
+
+# npm / yarn debug
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# TypeScript incremental
+*.tsbuildinfo
+
+# Env files
+.env
+.env.*
+!.env.example
+
+# ======================== TypeScript / JS =================
+# compiled output
+*.js.map
+
+# ======================== Flutter / Dart ==================
+/**/build/
+/**/.dart_tool/
+/**/.packages
+/**/.flutter-plugins
+/**/.flutter-plugins-dependencies
+/**/.pub-cache/
+/.flutter-plugins
+/.flutter-plugins-dependencies
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# iOS
+**/ios/Pods/
+**/ios/Flutter/Flutter.framework
+
+# Android
+**/android/.gradle/
+**/android/local.properties
+**/android/**/gradle-wrapper.jar
+**/android/**/gradle-wrapper.properties
+
+# Android keystores and signing files
+**/android/**/*.keystore
+
+# ======================== Python ==========================
+**/__pycache__/
+**/*.py[cod]
+**/*.pyo
+**/*.pyd
+**/.venv/
+**/venv/
+.venv
+venv/
+env/
+ENV/
+pip-log.txt
+.pytest_cache/
+.mypy_cache/
+
+# Packaging
+dist/
+build/
+*.egg-info/
+
+# ======================== Docker / Local data ==============
+# Local docker and runtime data directories (project-specific)
+kafka/data/
+redis/data/
+database/data/
+
+# docker-compose local overrides
+docker-compose.override.yml
+
+# Ignore Dockerfile outputs and temp
+.docker/
+
+# ======================== IDEs =============================
+.vscode/
+.idea/
+*.iml
+
+# ======================== Misc ============================
+# Compiled artifacts
+*.class
+*.o
+*.so
+*.dll
+*.exe
+
+# Databases / caches
+*.db
+*.sqlite
+*.sqlite3
+*.db-journal
+
+# Large or generated data used for experiments
+*.parquet
+results/
+metrics/
+
+# Keep track: files to commit may be added to exceptions above if needed

@@ -1,0 +1,312 @@
+.mapWrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Sensor no mapa */
+.sensorWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 60px;
+  height: 60px;
+}
+
+.circle {
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  transition:
+    background 0.6s ease,
+    border-color 0.6s ease,
+    box-shadow 0.6s ease;
+}
+
+.circleAnimate {
+  animation: pulse 0.6s ease;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  40% {
+    transform: scale(1.3);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid #1a1d24;
+  transition: background 0.6s ease;
+  z-index: 1;
+}
+
+.sensorSelected .circle {
+  width: 64px;
+  height: 64px;
+}
+
+.sensorLabel {
+  position: absolute;
+  bottom: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a1d24;
+  border: 1px solid #2e3340;
+  border-radius: 5px;
+  padding: 2px 7px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 11px;
+  color: #e8eaf0;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+/* Legenda */
+.legend {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: #1a1d24;
+  border: 1px solid #2e3340;
+  border-radius: 8px;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 10;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 11.5px;
+  color: #8b90a0;
+}
+
+.legendDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Card do sensor */
+.cardWrap {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(580px, calc(100% - 48px));
+  z-index: 10;
+}
+
+.card {
+  background: #1a1d24;
+  border: 1px solid #2e3340;
+  border-radius: 12px;
+  padding: 16px 18px 14px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.cardSub {
+  font-size: 10.5px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #555c6e;
+  margin-bottom: 2px;
+  font-family: "DM Sans", sans-serif;
+}
+
+.cardName {
+  font-size: 20px;
+  font-weight: 600;
+  color: #e8eaf0;
+  letter-spacing: -0.02em;
+  font-family: "DM Mono", monospace;
+}
+
+.cardRight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: "DM Sans", sans-serif;
+}
+
+.badgeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.closeBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #555c6e;
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  border-radius: 5px;
+}
+
+.closeBtn:hover {
+  color: #e8eaf0;
+}
+
+.cardStats {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+  padding: 10px 14px;
+  background: #21252e;
+  border-radius: 8px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.statLabel {
+  font-size: 11px;
+  color: #555c6e;
+  font-family: "DM Sans", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.statValue {
+  font-size: 16px;
+  font-weight: 600;
+  color: #e8eaf0;
+  font-family: "DM Mono", monospace;
+}
+
+.statDivider {
+  width: 1px;
+  height: 32px;
+  background: #2e3340;
+  margin: 0 4px;
+}
+
+.cardGranRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.granLabel {
+  font-size: 11.5px;
+  color: #555c6e;
+  font-family: "DM Sans", sans-serif;
+  white-space: nowrap;
+}
+
+.granBtns {
+  display: flex;
+  gap: 4px;
+}
+
+.granBtn {
+  padding: 4px 10px;
+  background: transparent;
+  border: 1px solid #2e3340;
+  border-radius: 6px;
+  color: #8b90a0;
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.granBtn:hover {
+  background: #21252e;
+  color: #e8eaf0;
+}
+
+.granBtnActive {
+  background: rgba(74, 140, 255, 0.15);
+  border-color: rgba(74, 140, 255, 0.4);
+  color: #4a8cff;
+}
+
+.chartWrap {
+  height: 160px;
+}
+
+.chartLoading {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #555c6e;
+  font-family: "DM Sans", sans-serif;
+}
+
+.dateRange {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.dateField {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dateInput {
+  background: #21252e;
+  border: 1px solid #2e3340;
+  border-radius: 7px;
+  padding: 5px 10px;
+  color: #e8eaf0;
+  font-family: "DM Mono", monospace;
+  font-size: 12px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.dateInput:focus {
+  border-color: #4a8cff;
+}

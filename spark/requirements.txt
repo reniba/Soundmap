@@ -1,0 +1,4 @@
+psycopg2-binary==2.9.9
+pandas==2.3.3
+pyarrow==24.0.0
+redis==5.2.1

@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  overflow: none;
+  align-items: center;
+  margin-right: 12px;
+  gap: 8px;
+}
+
+.text {
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 6 00;
+  color: white;
+}
+
+.avatar {
+  border-radius: 100%;
+  background-color: #e4a830;
+  color: black;
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+  align-items: center;
+}

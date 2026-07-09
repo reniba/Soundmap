@@ -1,0 +1,218 @@
+{
+  "uid": "experimental",
+  "title": "Análise Experimental (Rodadas R1–R5)",
+  "description": "Comparação entre rodadas experimentais: latência, throughput, edge computing e fault injection",
+  "tags": ["soundmap", "experimental"],
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "30s",
+  "time": { "from": "now-6h", "to": "now" },
+  "timepicker": {},
+  "timezone": "browser",
+  "editable": true,
+  "graphTooltip": 1,
+  "templating": {
+    "list": [
+      {
+        "name": "round_id",
+        "label": "Rodada",
+        "type": "query",
+        "datasource": { "type": "postgres", "uid": "noisedb" },
+        "query": "SELECT DISTINCT round_id FROM batch_metrics ORDER BY round_id",
+        "refresh": 2,
+        "includeAll": true,
+        "multi": true,
+        "allValue": null,
+        "current": {},
+        "hide": 0,
+        "sort": 1
+      },
+      {
+        "name": "load_level",
+        "label": "Carga",
+        "type": "query",
+        "datasource": { "type": "postgres", "uid": "noisedb" },
+        "query": "SELECT DISTINCT load_level FROM batch_metrics ORDER BY load_level",
+        "refresh": 2,
+        "includeAll": true,
+        "multi": true,
+        "allValue": null,
+        "current": {},
+        "hide": 0,
+        "sort": 1
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": 1,
+      "title": "Avg E2E Latency por Rodada",
+      "type": "barchart",
+      "datasource": { "type": "postgres", "uid": "noisedb" },
+      "gridPos": { "h": 9, "w": 12, "x": 0, "y": 0 },
+      "targets": [
+        {
+          "datasource": { "type": "postgres", "uid": "noisedb" },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  round_id,\n  ROUND(avg(e2e_latency_ms)::NUMERIC, 1) AS \"Avg E2E (ms)\",\n  ROUND(percentile_cont(0.95) WITHIN GROUP (ORDER BY e2e_latency_ms)::NUMERIC, 1) AS \"P95 (ms)\"\nFROM batch_metrics\nWHERE e2e_latency_ms IS NOT NULL\n  AND ('$round_id' = 'All' OR round_id IN ($round_id))\nGROUP BY round_id\nORDER BY round_id",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "xField": "round_id",
+        "stacking": "none",
+        "orientation": "auto",
+        "groupWidth": 0.7,
+        "barWidth": 0.97,
+        "tooltip": { "mode": "multi", "sort": "none" },
+        "legend": { "calcs": [], "displayMode": "list", "placement": "bottom", "showLegend": true }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ms",
+          "color": { "mode": "palette-classic" }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 2,
+      "title": "Avg Throughput por Nível de Carga",
+      "type": "barchart",
+      "datasource": { "type": "postgres", "uid": "noisedb" },
+      "gridPos": { "h": 9, "w": 12, "x": 12, "y": 0 },
+      "targets": [
+        {
+          "datasource": { "type": "postgres", "uid": "noisedb" },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  load_level,\n  ROUND(avg(input_rows_per_sec)::NUMERIC, 2) AS \"Input rows/s\",\n  ROUND(avg(proc_rows_per_sec)::NUMERIC, 2)  AS \"Processed rows/s\"\nFROM batch_metrics\nWHERE input_rows_per_sec > 0\n  AND ('$load_level' = 'All' OR load_level IN ($load_level))\nGROUP BY load_level\nORDER BY load_level",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "xField": "load_level",
+        "stacking": "none",
+        "orientation": "auto",
+        "groupWidth": 0.7,
+        "barWidth": 0.97,
+        "tooltip": { "mode": "multi", "sort": "none" },
+        "legend": { "calcs": [], "displayMode": "list", "placement": "bottom", "showLegend": true }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps",
+          "color": { "mode": "palette-classic" }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 3,
+      "title": "Latência E2E — Edge Computing vs Cloud",
+      "type": "timeseries",
+      "datasource": { "type": "postgres", "uid": "noisedb" },
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 9 },
+      "targets": [
+        {
+          "datasource": { "type": "postgres", "uid": "noisedb" },
+          "editorMode": "code",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  $__timeGroupAlias(batch_timestamp, $__interval, NULL),\n  avg(e2e_latency_ms) FILTER (WHERE edge_computing = false) AS \"Cloud (edge=false)\",\n  avg(e2e_latency_ms) FILTER (WHERE edge_computing = true)  AS \"Edge Computing\"\nFROM batch_metrics\nWHERE $__timeFilter(batch_timestamp)\n  AND e2e_latency_ms IS NOT NULL\nGROUP BY 1\nORDER BY 1",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "tooltip": { "mode": "multi", "sort": "none" },
+        "legend": { "calcs": ["mean", "max"], "displayMode": "table", "placement": "bottom", "showLegend": true }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ms",
+          "color": { "mode": "palette-classic" },
+          "custom": { "lineWidth": 2, "fillOpacity": 8 }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 4,
+      "title": "Fault Injection — Eventos Esperados vs Recuperados",
+      "type": "timeseries",
+      "datasource": { "type": "postgres", "uid": "noisedb" },
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 17 },
+      "targets": [
+        {
+          "datasource": { "type": "postgres", "uid": "noisedb" },
+          "editorMode": "code",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  $__timeGroupAlias(batch_timestamp, $__interval, NULL),\n  avg(events_expected)  AS \"Esperados\",\n  avg(events_recovered) AS \"Recuperados\"\nFROM batch_metrics\nWHERE $__timeFilter(batch_timestamp)\n  AND fault_injected = true\n  AND events_expected IS NOT NULL\nGROUP BY 1\nORDER BY 1",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "tooltip": { "mode": "multi", "sort": "none" },
+        "legend": { "calcs": ["mean"], "displayMode": "list", "placement": "bottom", "showLegend": true }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "color": { "mode": "palette-classic" },
+          "custom": { "lineWidth": 2, "fillOpacity": 10 }
+        },
+        "overrides": [
+          { "matcher": { "id": "byName", "options": "Esperados" }, "properties": [ { "id": "color", "value": { "fixedColor": "blue", "mode": "fixed" } } ] },
+          { "matcher": { "id": "byName", "options": "Recuperados" }, "properties": [ { "id": "color", "value": { "fixedColor": "green", "mode": "fixed" } } ] }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "title": "Resumo por Rodada e Carga",
+      "type": "table",
+      "datasource": { "type": "postgres", "uid": "noisedb" },
+      "gridPos": { "h": 10, "w": 24, "x": 0, "y": 25 },
+      "targets": [
+        {
+          "datasource": { "type": "postgres", "uid": "noisedb" },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  round_id                                                                              AS \"Rodada\",\n  load_level                                                                            AS \"Carga\",\n  trigger_interval_ms                                                                   AS \"Trigger (ms)\",\n  spark_cpus                                                                            AS \"CPUs\",\n  edge_computing                                                                        AS \"Edge?\",\n  COUNT(*)                                                                              AS \"Batches\",\n  ROUND(avg(e2e_latency_ms)::NUMERIC, 1)                                               AS \"Avg E2E (ms)\",\n  ROUND(percentile_cont(0.95) WITHIN GROUP (ORDER BY e2e_latency_ms)::NUMERIC, 1)      AS \"P95 E2E (ms)\",\n  ROUND(avg(input_rows_per_sec)::NUMERIC, 1)                                           AS \"Input rows/s\",\n  ROUND(avg(proc_rows_per_sec)::NUMERIC, 1)                                            AS \"Proc rows/s\",\n  SUM(CASE WHEN fault_injected THEN 1 ELSE 0 END)                                      AS \"Batches c/ Falha\"\nFROM batch_metrics\nWHERE e2e_latency_ms IS NOT NULL\n  AND ('$round_id' = 'All' OR round_id IN ($round_id))\n  AND ('$load_level' = 'All' OR load_level IN ($load_level))\nGROUP BY round_id, load_level, trigger_interval_ms, spark_cpus, edge_computing\nORDER BY round_id, load_level",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "sortBy": [{ "displayName": "Rodada", "desc": false }],
+        "cellHeight": "sm",
+        "footer": { "show": false }
+      },
+      "fieldConfig": {
+        "defaults": { "custom": { "align": "auto" } },
+        "overrides": [
+          {
+            "matcher": { "id": "byName", "options": "Avg E2E (ms)" },
+            "properties": [
+              { "id": "unit", "value": "ms" },
+              { "id": "custom.displayMode", "value": "color-background" },
+              { "id": "thresholds", "value": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "orange", "value": 500 }, { "color": "red", "value": 2000 } ] } }
+            ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "P95 E2E (ms)" },
+            "properties": [ { "id": "unit", "value": "ms" } ]
+          },
+          {
+            "matcher": { "id": "byName", "options": "Input rows/s" },
+            "properties": [ { "id": "unit", "value": "reqps" } ]
+          }
+        ]
+      }
+    }
+  ]
+}

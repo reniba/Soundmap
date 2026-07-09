@@ -1,0 +1,226 @@
+.page {
+  height: 100vh;
+  width: 100vw;
+
+  background-color: #111318;
+
+  background-image:
+    radial-gradient(
+      circle at center 20%,
+      rgba(68, 127, 228, 0.15),
+      transparent 40%
+    ),
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+
+  background-size:
+    auto,
+    40px 40px,
+    40px 40px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #1a1d24;
+  padding: 4vh;
+  padding-top: 5vh;
+  border-radius: 20px;
+  border: 1.5px solid;
+  border-color: #2e3340;
+  min-width: 350px;
+  max-width: 400px;
+  padding-bottom: 3vh;
+}
+
+.buttom {
+  margin-top: 4vh;
+  background-color: #447fe4;
+  width: 49vh;
+  height: 6.5vh;
+  border: none;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  width: 100%;
+}
+
+.h1 {
+  font-size: 27px;
+  text-align: left;
+  font-family: "DM Sans", sans-serif;
+  margin: 0;
+}
+
+.soundMapIot {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 5vh;
+}
+
+.logo {
+  width: 4vh;
+  color: #447fe4;
+  object-fit: contain;
+  fill: #447fe4;
+  filter: invert(1);
+  fill: #447fe4;
+}
+
+.soundMap {
+  font-size: 3vh;
+  text-align: left;
+  font-family: "DM Sans", sans-serif;
+  margin: 0;
+}
+
+.iot {
+  font-size: 3vh;
+  text-align: left;
+  font-family: "DM Sans", sans-serif;
+  margin: 0;
+  color: #447fe4;
+}
+
+.h2_spaced {
+  font-size: 2vh;
+  text-align: left;
+  font-family: "DM Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #8b90a0;
+  line-height: 1.5;
+  margin: 0;
+  margin-bottom: 2vh;
+  margin-top: 6px;
+}
+
+.h2 {
+  font-size: 2vh;
+  text-align: left;
+  font-family: "DM Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #8b90a0;
+  line-height: 1.5;
+  margin: 0;
+  margin-bottom: 6px;
+  margin-top: 15px;
+}
+
+.doNotHaveAnAccount {
+  text-align: left;
+  font-family: "DM Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #8b90a0;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.link {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  color: #447fe4;
+  font-size: 14px;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 400;
+}
+
+.createAccount {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  font-size: 16px;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 400;
+}
+
+.errorMessage {
+  font-size: 14px;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 400;
+  color: rgb(211, 76, 76);
+}
+
+.errorBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  color: rgb(211, 76, 76);
+}
+
+.successOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.successCard {
+  background: white;
+  padding: 32px;
+  border-radius: 18px;
+  min-width: 320px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: popup 0.2s ease;
+}
+
+.successTitle {
+  margin: 0;
+  color: #111318;
+  font-size: 22px;
+  font-family: "DM Sans", sans-serif;
+}
+
+.successText {
+  margin-top: 8px;
+  color: #6b7280;
+  font-size: 15px;
+  font-family: "DM Sans", sans-serif;
+}
+
+.sucessIcon {
+  color: #22c55e;
+  margin-bottom: 25px;
+  margin-top: 10px;
+}
+
+@keyframes popup {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

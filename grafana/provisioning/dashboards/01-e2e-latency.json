@@ -1,0 +1,225 @@
+{
+  "uid": "e2e-latency",
+  "title": "Latência End-to-End",
+  "description": "Decomposição e distribuição da latência E2E do pipeline Sensor → Kafka → Spark → PostgreSQL",
+  "tags": ["soundmap", "latency"],
+  "schemaVersion": 39,
+  "version": 1,
+  "refresh": "10s",
+  "time": { "from": "now-30m", "to": "now" },
+  "timepicker": {},
+  "timezone": "browser",
+  "editable": true,
+  "graphTooltip": 1,
+  "panels": [
+    {
+      "id": 1,
+      "title": "Avg E2E Latency",
+      "type": "stat",
+      "datasource": { "type": "postgres", "uid": "noisedb" },
+      "gridPos": { "h": 4, "w": 8, "x": 0, "y": 0 },
+      "targets": [
+        {
+          "datasource": { "type": "postgres", "uid": "noisedb" },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT avg(e2e_latency_ms) AS \"Avg E2E\" FROM batch_metrics WHERE $__timeFilter(batch_timestamp) AND e2e_latency_ms IS NOT NULL",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "orientation": "auto",
+        "textMode": "auto",
+        "colorMode": "background",
+        "graphMode": "none"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ms",
+          "decimals": 1,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "orange", "value": 500 },
+              { "color": "red", "value": 2000 }
+            ]
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 2,
+      "title": "P95 E2E Latency",
+      "type": "stat",
+      "datasource": { "type": "postgres", "uid": "noisedb" },
+      "gridPos": { "h": 4, "w": 8, "x": 8, "y": 0 },
+      "targets": [
+        {
+          "datasource": { "type": "postgres", "uid": "noisedb" },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT percentile_cont(0.95) WITHIN GROUP (ORDER BY e2e_latency_ms) AS \"P95 E2E\" FROM batch_metrics WHERE $__timeFilter(batch_timestamp) AND e2e_latency_ms IS NOT NULL",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "orientation": "auto",
+        "textMode": "auto",
+        "colorMode": "background",
+        "graphMode": "none"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ms",
+          "decimals": 1,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "orange", "value": 1000 },
+              { "color": "red", "value": 5000 }
+            ]
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 3,
+      "title": "P99 E2E Latency",
+      "type": "stat",
+      "datasource": { "type": "postgres", "uid": "noisedb" },
+      "gridPos": { "h": 4, "w": 8, "x": 16, "y": 0 },
+      "targets": [
+        {
+          "datasource": { "type": "postgres", "uid": "noisedb" },
+          "editorMode": "code",
+          "format": "table",
+          "rawQuery": true,
+          "rawSql": "SELECT percentile_cont(0.99) WITHIN GROUP (ORDER BY e2e_latency_ms) AS \"P99 E2E\" FROM batch_metrics WHERE $__timeFilter(batch_timestamp) AND e2e_latency_ms IS NOT NULL",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "orientation": "auto",
+        "textMode": "auto",
+        "colorMode": "background",
+        "graphMode": "none"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ms",
+          "decimals": 1,
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "color": "green", "value": null },
+              { "color": "orange", "value": 2000 },
+              { "color": "red", "value": 10000 }
+            ]
+          }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 4,
+      "title": "E2E Latency — Percentis ao longo do tempo",
+      "type": "timeseries",
+      "datasource": { "type": "postgres", "uid": "noisedb" },
+      "gridPos": { "h": 9, "w": 24, "x": 0, "y": 4 },
+      "targets": [
+        {
+          "datasource": { "type": "postgres", "uid": "noisedb" },
+          "editorMode": "code",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  $__timeGroupAlias(batch_timestamp, $__interval, NULL),\n  percentile_cont(0.50) WITHIN GROUP (ORDER BY e2e_latency_ms) AS \"p50\",\n  percentile_cont(0.95) WITHIN GROUP (ORDER BY e2e_latency_ms) AS \"p95\",\n  percentile_cont(0.99) WITHIN GROUP (ORDER BY e2e_latency_ms) AS \"p99\"\nFROM batch_metrics\nWHERE $__timeFilter(batch_timestamp)\n  AND e2e_latency_ms IS NOT NULL\nGROUP BY 1\nORDER BY 1",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "tooltip": { "mode": "multi", "sort": "none" },
+        "legend": { "calcs": ["mean", "max"], "displayMode": "table", "placement": "bottom", "showLegend": true }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ms",
+          "color": { "mode": "palette-classic" },
+          "custom": { "lineWidth": 2, "fillOpacity": 5 }
+        },
+        "overrides": [
+          { "matcher": { "id": "byName", "options": "p99" }, "properties": [ { "id": "color", "value": { "fixedColor": "red", "mode": "fixed" } } ] },
+          { "matcher": { "id": "byName", "options": "p95" }, "properties": [ { "id": "color", "value": { "fixedColor": "orange", "mode": "fixed" } } ] },
+          { "matcher": { "id": "byName", "options": "p50" }, "properties": [ { "id": "color", "value": { "fixedColor": "green", "mode": "fixed" } } ] }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "title": "Decomposição da Latência por Fase (tt = ts + tp + tw)",
+      "description": "ts = scheduling_delay | tp = query_planning + add_batch + wal_commit | tw = trigger_exec restante",
+      "type": "timeseries",
+      "datasource": { "type": "postgres", "uid": "noisedb" },
+      "gridPos": { "h": 9, "w": 24, "x": 0, "y": 13 },
+      "targets": [
+        {
+          "datasource": { "type": "postgres", "uid": "noisedb" },
+          "editorMode": "code",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  $__timeGroupAlias(batch_timestamp, $__interval, NULL),\n  avg(scheduling_delay_ms) AS \"Scheduling Delay (ts)\",\n  avg(query_planning_ms)   AS \"Query Planning\",\n  avg(add_batch_ms)        AS \"Sink Write (addBatch)\",\n  avg(wal_commit_ms)       AS \"WAL Commit\"\nFROM batch_metrics\nWHERE $__timeFilter(batch_timestamp)\nGROUP BY 1\nORDER BY 1",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "tooltip": { "mode": "multi", "sort": "desc" },
+        "legend": { "calcs": ["mean"], "displayMode": "table", "placement": "bottom", "showLegend": true }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ms",
+          "color": { "mode": "palette-classic" },
+          "custom": { "lineWidth": 1, "fillOpacity": 20, "stacking": { "mode": "normal", "group": "A" } }
+        },
+        "overrides": []
+      }
+    },
+    {
+      "id": 6,
+      "title": "Trigger Execution Time por Batch",
+      "type": "timeseries",
+      "datasource": { "type": "postgres", "uid": "noisedb" },
+      "gridPos": { "h": 8, "w": 24, "x": 0, "y": 22 },
+      "targets": [
+        {
+          "datasource": { "type": "postgres", "uid": "noisedb" },
+          "editorMode": "code",
+          "format": "time_series",
+          "rawQuery": true,
+          "rawSql": "SELECT\n  $__timeGroupAlias(batch_timestamp, $__interval, NULL),\n  avg(trigger_exec_ms) AS \"Trigger Exec (ms)\"\nFROM batch_metrics\nWHERE $__timeFilter(batch_timestamp)\nGROUP BY 1\nORDER BY 1",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "tooltip": { "mode": "single", "sort": "none" },
+        "legend": { "calcs": ["mean", "max"], "displayMode": "list", "placement": "bottom", "showLegend": true }
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "ms",
+          "color": { "mode": "fixed", "fixedColor": "blue" },
+          "custom": { "lineWidth": 2, "fillOpacity": 10 }
+        },
+        "overrides": []
+      }
+    }
+  ]
+}

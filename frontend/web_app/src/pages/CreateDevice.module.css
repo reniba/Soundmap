@@ -1,0 +1,318 @@
+.page {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.infosContainer {
+  height: 100%;
+  width: 300px;
+  max-height: 100%;
+  padding: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background-color: #1a1d24;
+  background-color: #21252e;
+  border: 2px solid #2e3340;
+  border-left: none;
+  border-top: none;
+}
+
+.mapa {
+  flex: 1;
+  height: 100%;
+  background-color: white;
+}
+
+.getBackContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 2px;
+  cursor: pointer;
+}
+
+.icon {
+  color: white;
+  stroke-width: 2.3px;
+}
+
+.getBackText {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  color: white;
+}
+
+.infosText {
+  padding-top: 10px;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+  color: #7e8087;
+  letter-spacing: 1.4px;
+}
+
+.inputTitle {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  color: #8c8d94;
+}
+
+.input {
+  height: 28px;
+  width: 100%;
+  background: transparent;
+  background-color: #21252e;
+  border: 2px solid #2e3340;
+  border-radius: 8px;
+  outline: none;
+  color: #e8eaf0;
+  font-family: "DM Sans", sans-serif;
+  padding-left: 7px;
+  padding-right: 7px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+}
+
+.urlInputTitle {
+  display: flex;
+  flex-direction: row;
+  align-items: bottom;
+  justify-content: flex-start;
+}
+
+.inputTitleComplement {
+  font-family: "DM Sans", sans-serif;
+  padding-left: 5px;
+  font-size: 9px;
+}
+
+.imageContainer {
+  background-color: #363a42;
+  width: 100%;
+  height: 100px;
+  border: 2px solid #2e3340;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.image {
+  max-width: 100%;
+  max-height: 100%;
+
+  object-fit: contain;
+}
+
+.errorIcon {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+
+  padding-left: 22px;
+  box-sizing: border-box;
+}
+
+.invalidUrlText {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 430;
+  font-size: 12px;
+}
+
+.userInstructionsContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+.instructionsIcon {
+  color: #447fe4;
+  stroke-width: 2.5px;
+}
+
+.instructionsText {
+  font-family: "DM Sans", sans-serif;
+  font-size: 11px;
+  padding-top: 10px;
+  line-height: 20px;
+  color: #787a7f;
+  padding-bottom: 10px;
+}
+
+.coordinatesInput {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  padding-bottom: 10px;
+}
+
+.button {
+  background-color: #447fe4;
+  border: none;
+  border-radius: 6px;
+  height: 30px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 450;
+  margin-top: 20px;
+}
+
+.input:focus-within {
+  border-color: #447fe4;
+}
+
+.currentPointContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: #363a42;
+  width: 100%;
+  height: 70px;
+  border: 2px solid #2e3340;
+  border-radius: 6px;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 10px;
+  box-sizing: border-box;
+}
+
+.coordinate {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+}
+
+.coordinateContainer {
+  display: flex;
+  flex-direction: column;
+  gap: -10000000px;
+}
+
+.cord {
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.cordValue {
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 200;
+}
+
+.areasContainer {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.areasContainer::-webkit-scrollbar {
+  width: 4px;
+}
+
+.areasContainer::-webkit-scrollbar-thumb {
+  background: #2e3340;
+  border-radius: 4px;
+}
+
+.emptyAreas {
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  color: #555c6e;
+  text-align: center;
+  margin-top: 40px;
+}
+
+.areasGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.areaCard {
+  position: relative;
+  background-color: #21252e;
+  border: 1px solid #2e3340;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+
+.areaCard:hover {
+  border-color: #444c5c;
+}
+
+.areaCardSelected {
+  border-color: #4a8cff;
+  background-color: #212e45;
+}
+
+.areaCardImg {
+  width: 100%;
+  height: 90px;
+  overflow: hidden;
+}
+
+.areaCardImgEl {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.areaCardImgPlaceholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1a1d24;
+  color: #555c6e;
+}
+
+.areaCardName {
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: #e8eaf0;
+  padding: 8px 10px 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.areaCardCoords {
+  font-family: "DM Mono", monospace;
+  font-size: 10.5px;
+  color: #555c6e;
+  padding: 0 10px 10px;
+}
+
+.areaCardCheck {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #4a8cff;
+  color: #fff;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
