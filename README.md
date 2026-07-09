@@ -1,3 +1,34 @@
+## 👨‍💻 Desenvolvedores
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/brunorjanini">
+        <img src="https://github.com/brunorjanini.png" width="100px;" alt="Bruno Janini"/><br>
+        <sub>
+          <b>Bruno Janini</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/XandGVaz">
+        <img src="https://github.com/XandGVaz.png" width="100px;" alt="Vitor Alexandre"/><br>
+        <sub>
+          <b>Vitor Alexandre</b>
+        </sub>
+      </a>
+    </td>
+        <td align="center">
+      <a href="https://github.com/reniba">
+        <img src="https://github.com/reniba.png" width="100px;" alt="Renan"/><br>
+        <sub>
+          <b>Renan</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
 # SoundMap — Monitoramento de Ruído em Tempo Real
 
 Sistema de monitoramento e mapeamento de ruído urbano em tempo real, desenvolvido para a disciplina SSC0965 (ICMC/USP). A plataforma coleta leituras de sensores de decibéis, processa os dados via streaming com Apache Spark, e exibe mapas de intensidade sonora em aplicações web e mobile.
@@ -189,4 +220,5 @@ O sistema foi projetado para executar experimentos de desempenho de streaming. A
 | R2–R3  | `TRIGGER_INTERVAL` e `SPARK_MASTER_CPUS` variáveis, carga variável |
 
 ---
+
 
