@@ -1,7 +1,10 @@
-# SoundMap — Monitoramento de Ruído em Tempo Real
+<h1 align="center">SoundMap<br/>
+  Monitoramento de Ruído em Tempo Real
+ </h1>
+
 
 <p align="center">
-  <img src="./docs/logo.png" width="300px;" alt="Bruno Janini"/>
+  <img src="./docs/logo.jpeg" width="400px;" alt="Bruno Janini"/>
 </p>
 
 Sistema de monitoramento e mapeamento de ruído urbano em tempo real, desenvolvido para a disciplina SSC0965 (ICMC/USP). A plataforma coleta leituras de sensores de decibéis, processa os dados via streaming com Apache Spark, e exibe mapas de intensidade sonora em aplicações web e mobile.
@@ -86,6 +89,11 @@ Sistema de monitoramento e mapeamento de ruído urbano em tempo real, desenvolvi
 │   Kafka UI (8080)                                               │
 └─────────────────────────────────────────────────────────────────┘
 ```
+
+<p>
+  <img src="./docs/arquitetura.png" width="600px;" alt="Bruno Janini"/>
+</p>
+
 
 ---
 
