@@ -1,6 +1,20 @@
+# SoundMap — Monitoramento de Ruído em Tempo Real
+
+<p align="center">
+  <img src="./docs/logo.png" width="300px;" alt="Bruno Janini"/>
+</p>
+
+Sistema de monitoramento e mapeamento de ruído urbano em tempo real, desenvolvido para a disciplina SSC0965 (ICMC/USP). A plataforma coleta leituras de sensores de decibéis, processa os dados via streaming com Apache Spark, e exibe mapas de intensidade sonora em aplicações web e mobile.
+
+<p align="center">
+  <img src="./docs/mapa.jpeg" width="600px;" alt="Bruno Janini"/>
+</p>
+
+---
+
 ## 👨‍💻 Desenvolvedores
 
-<table>
+<table align="center">
   <tr>
     <td align="center">
       <a href="https://github.com/brunorjanini">
@@ -29,9 +43,9 @@
   </tr>
 </table>
 
-# SoundMap — Monitoramento de Ruído em Tempo Real
-
-Sistema de monitoramento e mapeamento de ruído urbano em tempo real, desenvolvido para a disciplina SSC0965 (ICMC/USP). A plataforma coleta leituras de sensores de decibéis, processa os dados via streaming com Apache Spark, e exibe mapas de intensidade sonora em aplicações web e mobile.
+<p align="center">
+  <img src="./docs/equipe.jpeg" width="500px;" alt="Bruno Janini"/>
+</p>
 
 ---
 
